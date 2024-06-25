@@ -21,4 +21,5 @@
 # Configurando o Krajee
 
 `composer require kartik-v/yii2-editors "dev-master"`
+
 `composer require yiisoft/yii2-bootstrap4`
