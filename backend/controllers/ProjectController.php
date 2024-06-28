@@ -7,6 +7,7 @@ use yii\web\Controller;
 use yii\web\UploadedFile;
 use common\models\Project;
 use yii\filters\VerbFilter;
+use common\models\ProjectImage;
 use backend\models\ProjectSearch;
 use yii\web\NotFoundHttpException;
 
@@ -27,6 +28,7 @@ class ProjectController extends Controller
                     'class' => VerbFilter::className(),
                     'actions' => [
                         'delete' => ['POST'],
+                        'delete-project-image' => ['POST'],
                     ],
                 ],
             ]
@@ -107,9 +109,19 @@ class ProjectController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            Yii::$app->session->setFlash('success', 'Successfully updated');
-            return $this->redirect(['view', 'id' => $model->id]);
+        if( $this->request->isPost && $model->load($this->request->post()) ){
+
+            $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+
+            if( $model->save() ){
+
+                $model->saveImage();
+
+                Yii::$app->session->setFlash('success', 'Successfully updated');
+                return $this->redirect(['view', 'id' => $model->id]);
+    
+            }
+
         }
 
         return $this->render('update', [
@@ -129,6 +141,25 @@ class ProjectController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+
+    public function actionDeleteProjectImage(){
+
+        $image = ProjectImage::findOne($this->request->post('id'));
+
+        if( !$image ){
+
+            throw new NotFoundExeception();
+
+        }
+
+        if( $image->file->delete() ){
+
+            $path = Yii::$app->params['uploads']['projects'] . '/' . $image->file->name;
+            unlink($path);
+
+        }
+
     }
 
     /**

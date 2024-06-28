@@ -1,12 +1,19 @@
 <?php
 
 use yii\helpers\Html;
+use yii\web\JqueryAsset;
 use yii\widgets\ActiveForm;
 use kartik\editors\Summernote;
 
 /** @var yii\web\View $this */
 /** @var common\models\Project $model */
 /** @var yii\widgets\ActiveForm $form */
+
+$this->registerJsFile(
+    '@web/js/projectForm.js',
+    ['depends' => [JqueryAsset::class]]
+);
+
 ?>
 
 <div class="project-form">
@@ -31,10 +38,22 @@ use kartik\editors\Summernote;
 
     <?php foreach( $model->images as $image ): ?>
 
-        <?= Html::img($image->file->absoluteUrl(), [
-            'height' => 200,
-            'class' => 'mb-3'
-        ]) ?>
+        <div class="" id="project-form__image-container-<?= $image->id ?>">
+
+            <?= Html::img($image->file->absoluteUrl(), [
+                'height' => 200,
+                'class' => 'mb-3',
+                'class' => 'project-view__image'
+            ]) ?>
+    
+            <?= Html::button(Yii::t('app', 'Delete'), [
+                'class' => 'mb-3 btn btn-danger btn-delete-project',
+                'data-project-image-id' => $image->id
+            ]) ?>
+    
+            <div id="project-form__image-error-message-<?= $image->id ?>" class="text-danger"></div>
+
+        </div>
 
     <?php endforeach; ?>
 
