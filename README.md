@@ -12,7 +12,7 @@
 
 - Rollback
 
-``
+`php yii migrate/down `
 
 - Rodar migration
 
