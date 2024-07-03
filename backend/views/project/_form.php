@@ -1,7 +1,9 @@
 <?php
 
+use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\web\JqueryAsset;
+use kartik\file\FileInput;
 use yii\widgets\ActiveForm;
 use kartik\editors\Summernote;
 
@@ -36,28 +38,16 @@ $this->registerJsFile(
         'options' => ['readOnly' => true]
     ]) ?>
 
-    <?php foreach( $model->images as $image ): ?>
-
-        <div class="" id="project-form__image-container-<?= $image->id ?>">
-
-            <?= Html::img($image->file->absoluteUrl(), [
-                'height' => 200,
-                'class' => 'mb-3',
-                'class' => 'project-view__image'
-            ]) ?>
-    
-            <?= Html::button(Yii::t('app', 'Delete'), [
-                'class' => 'mb-3 btn btn-danger btn-delete-project',
-                'data-project-image-id' => $image->id
-            ]) ?>
-    
-            <div id="project-form__image-error-message-<?= $image->id ?>" class="text-danger"></div>
-
-        </div>
-
-    <?php endforeach; ?>
-
-    <?= $form->field($model, 'imageFile')->fileInput(['class' => 'form-control']) ?>
+    <?= $form->field($model, 'imageFile')->widget(FileInput::classname(), [
+        'options' => ['accept' => 'image/*'],
+        'pluginOptions' => [
+            'initialPreview' => $model->imageAbsoluteUrls(),
+            'initialPreviewAsData' => true,
+            'showUpload' => false,
+            'deleteUrl' => Url::to(['project/delete-project-image']),
+            'initialPreviewConfig' => $model->imageConfigs(),
+        ]
+    ]); ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>

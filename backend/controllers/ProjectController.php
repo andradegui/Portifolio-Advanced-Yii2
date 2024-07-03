@@ -145,20 +145,21 @@ class ProjectController extends Controller
 
     public function actionDeleteProjectImage(){
 
-        $image = ProjectImage::findOne($this->request->post('id'));
+        $image = ProjectImage::findOne($this->request->post('key'));
 
         if( !$image ){
 
-            throw new NotFoundExeception();
+            throw new NotFoundHttpExeception();
 
         }
 
         if( $image->file->delete() ){
 
-            $path = Yii::$app->params['uploads']['projects'] . '/' . $image->file->name;
-            unlink($path);
+            return json_encode(null);
 
         }
+
+        return json_encode(['error' => true]);
 
     }
 

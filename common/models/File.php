@@ -11,6 +11,7 @@ use Yii;
  * @property string $name
  * @property string $base_url
  * @property string $mine_type
+ * @property string $path_url
  *
  * @property ProjectImage[] $projectImages
  * @property ProjectTestimonial[] $projectTestimonials
@@ -31,8 +32,8 @@ class File extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'base_url', 'mine_type'], 'required'],
-            [['name', 'base_url', 'mine_type'], 'string', 'max' => 255],
+            [['name', 'base_url', 'mine_type', 'path_url'], 'required'],
+            [['name', 'base_url', 'mine_type', 'path_url'], 'string', 'max' => 255],
         ];
     }
 
@@ -46,6 +47,7 @@ class File extends \yii\db\ActiveRecord
             'name' => Yii::t('app', 'Name'),
             'base_url' => Yii::t('app', 'Base Url'),
             'mine_type' => Yii::t('app', 'Mine Type'),
+            'path_url' => Yii::t('app', 'Path Url'),
         ];
     }
 
@@ -71,5 +73,13 @@ class File extends \yii\db\ActiveRecord
 
     public function absoluteUrl(){
         return $this->base_url . '/' . $this->name;   
+    }
+
+    public function afterDelete(){
+
+        parent::afterDelete();
+
+        unlink($this->path_url . '/' . $this->name);
+
     }
 }

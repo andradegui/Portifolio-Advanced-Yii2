@@ -104,7 +104,8 @@ class Project extends \yii\db\ActiveRecord
             $file = new File();
             $file->name = uniqid(true) . '-' . $this->imageFile->extension;
             // print_r($file->name);die;
-            $file->base_url = Yii::$app->urlManager->createAbsoluteUrl(Yii::$app->params['uploads']['projects']);
+            $file->path_url = Yii::$app->params['uploads']['projects'];
+            $file->base_url = Yii::$app->urlManager->createAbsoluteUrl($file->path_url);
             $file->mine_type = mime_content_type($this->imageFile->tempName);
             $file->save();
     
@@ -125,5 +126,35 @@ class Project extends \yii\db\ActiveRecord
 
     public function hasImages(){
         return count($this->images) > 0;
+    }
+
+    public function imageAbsoluteUrls(){
+
+        $urls = [];
+
+        foreach( $this->images as $image ){
+
+            $urls[] = $image->file->absoluteUrl();
+
+        }
+
+        return $urls;
+
+    }
+
+    public function imageConfigs(){
+
+        $configs = [];
+
+        foreach( $this->images as $image ){
+
+            $configs[] = [
+                'key' => $image->id
+            ];
+
+        }
+
+        return $configs;
+
     }
 }
