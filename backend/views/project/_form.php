@@ -38,10 +38,10 @@ $this->registerJsFile(
         'options' => ['readOnly' => true]
     ]) ?>
 
-    <?= $form->field($model, 'imageFile')->widget(FileInput::classname(), [
-        'options' => ['accept' => 'image/*'],
+    <?= $form->field($model, 'imageFiles[]')->widget(FileInput::classname(), [
+        'options' => ['accept' => 'image/*', 'multiple' => true, 'required' => false],
         'pluginOptions' => [
-            'initialPreview' => $model->imageAbsoluteUrls(),
+            'initialPreview' => $model->imageAbsoluteUrls(), 
             'initialPreviewAsData' => true,
             'showUpload' => false,
             'deleteUrl' => Url::to(['project/delete-project-image']),
