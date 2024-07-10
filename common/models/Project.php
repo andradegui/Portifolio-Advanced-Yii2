@@ -45,7 +45,7 @@ class Project extends \yii\db\ActiveRecord
             [['tech_stack', 'description'], 'string'],
             [['start_date', 'end_date'], 'safe'],
             [['name'], 'string', 'max' => 255],
-            [['imageFiles'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg, jpeg', 'maxFiles' => 10],
+            [['imageFiles'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg, jpeg, tmp', 'maxFiles' => 10],
         ];
     }
 
@@ -103,9 +103,12 @@ class Project extends \yii\db\ActiveRecord
 
             foreach( $this->imageFiles as $imageFile ){
 
+                /**
+                 * @var $imageFile UploadedFile
+                 */
+
                 $file = new File();
-                $file->name = uniqid(true) . '-' . $imageFile->extension;
-                // print_r($file->name);die;
+                $file->name = uniqid(true) . '.' . $imageFile->extension;
                 $file->path_url = Yii::$app->params['uploads']['projects'];
                 $file->base_url = Yii::$app->urlManager->createAbsoluteUrl($file->path_url);
                 $file->mine_type = mime_content_type($imageFile->tempName);
@@ -115,8 +118,12 @@ class Project extends \yii\db\ActiveRecord
                 $projectImage->project_id = $this->id;
                 $projectImage->file_id = $file->id;
                 $projectImage->save();
+
+                $thumbnail = Image::thumbnail($imageFile->tempName, null, 1080);
         
-               if( !$imageFile->saveAs($file->path_url . '/' .$file->name) ){
+                $didSave = $thumbnail->save($file->path_url . '/' .$file->name);
+
+               if( !$didSave ){
     
                 $db->transaction->rollback();
     
