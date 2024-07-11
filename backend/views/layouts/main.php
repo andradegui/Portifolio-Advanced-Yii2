@@ -41,6 +41,7 @@ AppAsset::register($this);
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     }     
     $menuItems[] = ['label' => 'Projects', 'url' => ['/project/index'] ];
+    $menuItems[] = ['label' => 'Testimonials', 'url' => ['/testimonial/index'] ];
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav me-auto mb-2 mb-md-0'],
         'items' => $menuItems,
