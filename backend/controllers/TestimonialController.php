@@ -2,6 +2,8 @@
 
 namespace backend\controllers;
 
+use Yii;
+use common\models\File;
 use yii\web\Controller;
 use common\models\Project;
 use yii\filters\VerbFilter;
@@ -157,6 +159,20 @@ class TestimonialController extends Controller
     private function loadProjects(){
 
         return ArrayHelper::map(Project::find()->asArray()->all(), 'id', 'name');
+
+    }
+
+    public function actionDeleteCustomerImage(){
+
+        $file = File::findOne($this->request->post('key'));
+        
+        if( $file->delete() ){
+
+            return json_encode(null);
+
+        }
+
+        return json_encode(['error' => true]);
 
     }
 }

@@ -31,7 +31,24 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'id',
             'project_id',
-            'customer_image',
+            [
+                'attribute' => 'customer_image_id',
+                'format' => 'raw',
+                'value' => function ($model){
+
+                    if( !$model->customerImage ){
+
+                        return "Sem imagem";
+
+                    }
+
+                    return Html::img($model->customerImage->absoluteUrl(), [
+                        'alt' => $model->customer_name,
+                        'height' => 200
+                    ]);
+
+                },
+            ],
             'title',
             'customer_name',
             'review:ntext',

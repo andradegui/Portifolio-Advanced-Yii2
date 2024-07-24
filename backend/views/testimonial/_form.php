@@ -1,5 +1,6 @@
 <?php
 
+use yii\helpers\Url;
 use yii\helpers\Html;
 use kartik\file\FileInput;
 use yii\widgets\ActiveForm;
@@ -23,6 +24,7 @@ use yii\widgets\ActiveForm;
             'initialPreviewAsData' => true,
             'initialPreviewConfig' => $model->imageConfig(),
             'showUpload' => false,
+            'deleteUrl' => Url::to(['testimonial/delete-customer-image']),
         ],
     ]) ?>
 
