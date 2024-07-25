@@ -42,7 +42,7 @@ class Testimonial extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['project_id', 'customer_image', 'title', 'customer_name', 'review', 'rating'], 'required'],
+            [['project_id', 'title', 'customer_name', 'review', 'rating'], 'required'],
             [['project_id', 'customer_image', 'rating'], 'integer'],
             [['review'], 'string'],
             [['title', 'customer_name'], 'string', 'max' => 255],
@@ -96,48 +96,52 @@ class Testimonial extends \yii\db\ActiveRecord
 
     public function saveImage(){
 
-        $db = Yii::$app->db;
+        if( $this->imageFile ){
 
-        $transaction = $db->beginTransaction();
-
-        try{
-
-            $file = new File();
-            $file->name = uniqid(true) . '.' . $this->imageFile->extension;
-            $file->path_url = Yii::$app->params['uploads']['testimonials'];
-            $file->base_url = Yii::$app->urlManager->createAbsoluteUrl($file->path_url);
-            $file->mine_type = mime_content_type($this->imageFile->tempName);
-            $file->save();
-
-            $this->customer_image = $file->id;
-            // $this->save();
-
-            $thumbnail = Image::thumbnail($this->imageFile->tempName, null, 1080);
-            $didSave = $thumbnail->save($file->path_url . '/' .$file->name);
-
-            if( !$didSave ){
+            $db = Yii::$app->db;
     
-                $this->addError('imageFile', Yii::t('Erro ao salvar a imagem'));
+            $transaction = $db->beginTransaction();
+    
+            try{
+    
+                $file = new File();
+                $file->name = uniqid(true) . '.' . $this->imageFile->extension;
+                $file->path_url = Yii::$app->params['uploads']['testimonials'];
+                $file->base_url = Yii::$app->urlManager->createAbsoluteUrl($file->path_url);
+                $file->mine_type = mime_content_type($this->imageFile->tempName);
+                $file->save();
+    
+                $this->customer_image = $file->id;
+                // $this->save();
+    
+                $thumbnail = Image::thumbnail($this->imageFile->tempName, null, 1080);
+                $didSave = $thumbnail->save($file->path_url . '/' .$file->name);
+    
+                if( !$didSave ){
+        
+                    $this->addError('imageFile', Yii::t('Erro ao salvar a imagem'));
+                    return false;
+    
+                }
+    
+                $transaction->commit();
+    
+            } catch( Exception $e ){
+    
+                $db->transaction->rollback();
+                $this->addError('imageFile', Yii::t('Erro ao salvar a imagem') . '( ' . $e->getMessage . ' )');
                 return false;
-
+    
+            } catch( Throwable $e ){
+                
+                $db->transaction->rollback();
+                $this->addError('imageFile', Yii::t('Erro ao salvar a imagem') . '( ' . $e->getMessage . ' )');
+                return false;
+    
             }
-
-            $transaction->commit();
-
-        } catch( Exception $e ){
-
-            $db->transaction->rollback();
-            $this->addError('imageFile', Yii::t('Erro ao salvar a imagem') . '( ' . $e->getMessage . ' )');
-            return false;
-
-        } catch( Throwable $e ){
             
-            $db->transaction->rollback();
-            $this->addError('imageFile', Yii::t('Erro ao salvar a imagem') . '( ' . $e->getMessage . ' )');
-            return false;
-
         }
-
+        
         return true;
 
     }
