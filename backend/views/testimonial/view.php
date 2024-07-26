@@ -30,7 +30,14 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'project_id',
+            [
+                'attribute' => 'project_id',
+                'format' => 'raw',
+                'value' => function($model){
+                    return $model->project->name;
+                },
+
+            ],
             [
                 'attribute' => 'customer_image_id',
                 'format' => 'raw',

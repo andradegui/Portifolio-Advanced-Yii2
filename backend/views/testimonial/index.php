@@ -30,7 +30,14 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'project_id',
+            [
+                'attribute' => 'project_id',
+                'format' => 'raw',
+                'value' => function($model){
+                    return $model->project->name;
+                },
+
+            ],
             'customer_image',
             'title',
             'customer_name',
