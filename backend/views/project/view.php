@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
 
     <p>
-        <?= Html::a(Yii::t('app', 'New Testimonial'), ['testimonial\create', 'project_id' => $model->id]); ?>
+        <?= Html::a(Yii::t('app', 'New Testimonial'), ['testimonial/create', 'project_id' => $model->id]); ?>
     </p>
 
     <?= DetailView::widget([
