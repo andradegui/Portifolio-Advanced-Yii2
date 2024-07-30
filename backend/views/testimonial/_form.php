@@ -4,6 +4,7 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 use kartik\file\FileInput;
 use yii\widgets\ActiveForm;
+use kartik\select2\Select2
 
 /** @var yii\web\View $this */
 /** @var common\models\Testimonial $model */
@@ -15,7 +16,14 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'project_id')->dropDownList($projects, ['prompt' => Yii::t('app', 'Selecione um projeto')]) ?>
+    
+    <?= $form->field($model, 'project_id')->widget(Select2::classname(), [
+    'data' => $projects,
+    'options' => ['placeholder' => 'Selecione um projeto'],
+    'pluginOptions' => [
+        'allowClear' => true
+    ],
+]); ?>
 
     <?= $form->field($model, 'imageFile')->widget(FileInput::classname(), [
         'options' => ['accept' => 'image/*'],
