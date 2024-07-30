@@ -27,22 +27,38 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
             'id',
             [
                 'attribute' => 'project_id',
                 'format' => 'raw',
+                'filter' => $projects,
                 'value' => function($model){
-                    return $model->project->name;
+                    return Html::a($model->project->name, ['project/view', 'id' => $model->project_id]);
                 },
 
             ],
-            'customer_image',
+            [
+                'attribute' => 'customer_image',
+                'format' => 'raw',
+                'value' => function ($model){
+
+                    if( !$model->customerImage ){
+
+                        return "Sem imagem";
+
+                    }
+
+                    return Html::img($model->customerImage->absoluteUrl(), [
+                        'alt' => $model->customer_name,
+                        'height' => 80,
+                    ]);
+
+                },
+            ],
             'title',
             'customer_name',
             //'review:ntext',
-            //'rating',
+            'rating',
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Testimonial $model, $key, $index, $column) {
