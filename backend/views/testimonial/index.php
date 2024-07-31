@@ -32,6 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'project_id',
                 'format' => 'raw',
                 'filter' => $projects,
+                'filterInputOptions' => ['prompt' => 'Selecione..', 'class' => 'form-control'],
                 'value' => function($model){
                     return Html::a($model->project->name, ['project/view', 'id' => $model->project_id]);
                 },
