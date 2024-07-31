@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use common\models\Project;
 use yii\widgets\DetailView;
 
 /** @var yii\web\View $this */
@@ -61,6 +62,25 @@ $this->params['breadcrumbs'][] = $this->title;
             'description:ntext',
             'start_date',
             'end_date',
+            [
+                'label' => Yii::t('app', 'Testimonials'),
+                'format' => 'raw',
+                'value' => function(Project $models){
+
+                    $html = "";
+                    
+                    foreach( $models->testimonials as $testimonial ){
+
+                        $label = $testimonial->title . ' | ' . $testimonial->customer_name . ' | ' . $testimonial->rating;
+
+                        $html .= '<div>' . Html::a($label, ['testimonial/view', 'id' => $testimonial->id]) . '</div>';
+
+                    }
+
+                    return $html;
+
+                }
+            ]
         ],
     ]) ?>
 
