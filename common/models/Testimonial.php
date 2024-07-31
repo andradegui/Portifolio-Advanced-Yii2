@@ -48,6 +48,7 @@ class Testimonial extends \yii\db\ActiveRecord
             [['title', 'customer_name'], 'string', 'max' => 255],
             [['project_id'], 'exist', 'skipOnError' => true, 'targetClass' => Project::class, 'targetAttribute' => ['project_id' => 'id']],
             [['imageFile'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg'],
+            ['rating', 'integer', 'min' => 1, 'max' => 5]
         ];
     }
 

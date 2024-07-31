@@ -3,8 +3,9 @@
 use yii\helpers\Url;
 use yii\helpers\Html;
 use kartik\file\FileInput;
+use kartik\select2\Select2;
 use yii\widgets\ActiveForm;
-use kartik\select2\Select2
+use kartik\rating\StarRating;
 
 /** @var yii\web\View $this */
 /** @var common\models\Testimonial $model */
@@ -42,7 +43,9 @@ use kartik\select2\Select2
 
     <?= $form->field($model, 'review')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'rating')->textInput() ?>
+    <?= $form->field($model, 'rating')->widget(StarRating::classname(), [
+        'pluginOptions' => ['step' => 0.1]
+    ]); ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>
