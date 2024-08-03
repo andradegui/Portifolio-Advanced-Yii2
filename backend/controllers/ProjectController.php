@@ -7,9 +7,11 @@ use yii\web\Controller;
 use yii\web\UploadedFile;
 use common\models\Project;
 use yii\filters\VerbFilter;
+use yii\helpers\ArrayHelper;
 use common\models\ProjectImage;
 use backend\models\ProjectSearch;
 use yii\web\NotFoundHttpException;
+use backend\models\TestimonialSearch;
 
 /**
  * ProjectController implements the CRUD actions for Project model.
@@ -59,9 +61,18 @@ class ProjectController extends Controller
      */
     public function actionView($id)
     {
+
+        $searchModel = new TestimonialSearch();
+        $searchModel->project_id = $id;
+        $dataProvider = $searchModel->search($this->request->queryParams);
+
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'projects' => ArrayHelper::map(Project::find()->all(), 'id', 'name'),
         ]);
+
     }
 
     /**

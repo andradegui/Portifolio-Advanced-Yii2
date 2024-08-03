@@ -42,10 +42,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => function($model){
 
                     if( !$model->hasImages() ){
-                        return null;
-                    }
 
-                    $imagesHtml = "";
+                        return "Sem imagem";
+
+                    }
 
                     foreach( $model->images as $image ){
                         $imagesHtml .= Html::img($image->file->absoluteUrl(), [
@@ -61,27 +61,19 @@ $this->params['breadcrumbs'][] = $this->title;
             'tech_stack:raw',
             'description:ntext',
             'start_date',
-            'end_date',
-            [
-                'label' => Yii::t('app', 'Testimonials'),
-                'format' => 'raw',
-                'value' => function(Project $models){
-
-                    $html = "";
-                    
-                    foreach( $models->testimonials as $testimonial ){
-
-                        $label = $testimonial->title . ' | ' . $testimonial->customer_name . ' | ' . $testimonial->rating;
-
-                        $html .= '<div>' . Html::a($label, ['testimonial/view', 'id' => $testimonial->id]) . '</div>';
-
-                    }
-
-                    return $html;
-
-                }
-            ]
+            'end_date',           
         ],
     ]) ?>
+
+    <h2><?= Yii::t('app', 'Testimonials'); ?></h2>
+
+    <?= $this->render('/testimonial/_gridview', [
+        'searchModel' => $searchModel,
+        'dataProvider' => $dataProvider,
+        'projects' => $projects,
+        'isProjectColumnVisible' => false,
+    ]);
+
+    ?>
 
 </div>
