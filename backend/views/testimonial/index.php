@@ -23,51 +23,14 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            'id',
-            [
-                'attribute' => 'project_id',
-                'format' => 'raw',
-                'filter' => $projects,
-                'filterInputOptions' => ['prompt' => 'Selecione..', 'class' => 'form-control'],
-                'value' => function($model){
-                    return Html::a($model->project->name, ['project/view', 'id' => $model->project_id]);
-                },
-
-            ],
-            [
-                'attribute' => 'customer_image',
-                'format' => 'raw',
-                'value' => function ($model){
-
-                    if( !$model->customerImage ){
-
-                        return "Sem imagem";
-
-                    }
-
-                    return Html::img($model->customerImage->absoluteUrl(), [
-                        'alt' => $model->customer_name,
-                        'height' => 80,
-                    ]);
-
-                },
-            ],
-            'title',
-            'customer_name',
-            //'review:ntext',
-            'rating',
-            [
-                'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Testimonial $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'id' => $model->id]);
-                 }
-            ],
-        ],
-    ]); ?>
+    <?= 
+        $this->render('_gridview',[
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'projects' => $projects,
+            'isProjectColumnVisible' => true,
+        ]);
+    ?>
 
 
 </div>
