@@ -47,6 +47,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
                     }
 
+                    $imagesHtml = "";
+
                     foreach( $model->images as $image ){
                         $imagesHtml .= Html::img($image->file->absoluteUrl(), [
                             'height' => 200,
