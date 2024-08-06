@@ -69,13 +69,12 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h2><?= Yii::t('app', 'Testimonials'); ?></h2>
 
-    <?= $this->render('/testimonial/_gridview', [
-        'searchModel' => $searchModel,
-        'dataProvider' => $dataProvider,
-        'projects' => $projects,
-        'isProjectColumnVisible' => false,
-    ]);
+    <?php foreach( $model->testimonials as $testimonial ): ?>
 
-    ?>
+        <div> 
+            <?= Html::a($testimonial->title, ['testimonial/view', 'id' => $testimonial->id]); ?> 
+        </div>
+
+    <?php endforeach; ?>
 
 </div>
