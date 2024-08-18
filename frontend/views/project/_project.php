@@ -5,7 +5,7 @@ use yii\bootstrap5\Html;
 
 ?>
 
-<div class="container text-center">
+<div class="container">
 
     <a href="<?= Url::to(['project/view', 'id' => $model->id]) ?>" class="project__link">
     

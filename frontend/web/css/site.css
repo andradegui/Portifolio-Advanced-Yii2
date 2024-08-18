@@ -136,17 +136,19 @@ a.desc:after {
 }
 
 .project__image{
-    width: 50%;
+    width: 100%;
     border-radius: 10px;
-    /* height: 200px; */
-    /* object-fit: cover; */
-}
-
-.project__title{
-
+    height: 200px;
+    object-fit: cover;
 }
 
 .project-items{
     display: flex;
     flex-wrap: wrap;
+}
+
+.project-view__dates, 
+.project_view__tech-stack, 
+.project-view__description{
+    margin-bottom: 16px;
 }

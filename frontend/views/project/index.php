@@ -13,11 +13,12 @@ use yii\widgets\ListView;
 $this->title = Yii::t('app', 'Projects');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="project-index">
 
-    <h1 class="text-center mb-5"><?= Html::encode($this->title) ?></h1>
+<div class="project-index container">
 
-    <div class="container">
+    <h1 class="mb-5"><?= Html::encode($this->title) ?></h1>
+
+    <div class="">
 
         <?= ListView::widget([
             'dataProvider' => $dataProvider,
