@@ -182,6 +182,7 @@ class Project extends \yii\db\ActiveRecord
 
         try {
 
+            parent::deleteInternal();
             
             foreach( $this->images as $image ){
                 
@@ -189,7 +190,7 @@ class Project extends \yii\db\ActiveRecord
                 
             }
             
-            parent::deleteInternal();
+            // parent::deleteInternal();
             
             $transaction->commit();
 

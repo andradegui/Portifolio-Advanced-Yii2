@@ -168,7 +168,12 @@ class Testimonial extends \yii\db\ActiveRecord
 
             parent::deleteInternal();
 
-            $this->customerImage->deleteInternal();
+            // Se existir alguma imagem
+            if( $this->customerImage ){
+
+                $this->customerImage->deleteInternal();
+
+            }
             
             $transaction->commit();
 
