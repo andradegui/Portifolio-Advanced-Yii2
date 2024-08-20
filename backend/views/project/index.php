@@ -33,9 +33,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'end_date',
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Project $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'id' => $model->id]);
-                 }
+                // 'urlCreator' => function ($action, Project $model, $key, $index, $column) {
+                //     return Url::toRoute([$action, 'id' => $model->id]);
+                //  },
+                'controller' => 'project'
             ],
         ],
     ]); ?>
