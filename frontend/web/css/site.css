@@ -118,22 +118,12 @@ a.desc:after {
     }
 }
 
-.project {
+/* .project {
+    display: flex;
     max-width: 300px;
     margin-bottom: 32px;
-    margin-right: 62px;
-    margin-top: 20px;
-}
-
-.project__link{
-    text-decoration: none;
-    color: #000;
-}
-
-.project__link:hover{
-    text-decoration: none;
-    color: #2f8fc7;
-}
+    margin-right: 60px;
+} */
 
 .project__image{
     width: 100%;
@@ -142,10 +132,21 @@ a.desc:after {
     object-fit: cover;
 }
 
-.project-items{
+
+.project__link{
+    text-decoration: none;
+    color: #000;
+}
+
+.project__link:hover{
+    text-decoration: none;
+    color: #000;
+}
+
+/* .project-items{
     display: flex;
     flex-wrap: wrap;
-}
+} */
 
 .project-view__dates, 
 .project_view__tech-stack, 

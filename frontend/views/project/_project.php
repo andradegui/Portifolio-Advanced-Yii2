@@ -5,19 +5,19 @@ use yii\bootstrap5\Html;
 
 ?>
 
-<div class="container">
+<div class="item bg-light border p-3 rounded-4">
 
     <a href="<?= Url::to(['project/view', 'id' => $model->id]) ?>" class="project__link">
     
         <?php
     
-        $images = $model->imageAbsoluteUrls();
+            $images = $model->imageAbsoluteUrls();
     
-        if( count($images) > 0 ){
+            if( count($images) > 0 ){
     
-            echo Html::img($images[0], ['alt' => $model->name, 'class' => 'project__image']);
+                echo Html::img($images[0], ['alt' => $model->name, 'class' => 'project__image']);
     
-        }
+            }
     
         ?>
     
@@ -28,5 +28,3 @@ use yii\bootstrap5\Html;
     </a>
 
 </div>
-
-

@@ -11,20 +11,28 @@ use yii\widgets\ListView;
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
 $this->title = Yii::t('app', 'Projects');
-$this->params['breadcrumbs'][] = $this->title;
+
 ?>
 
-<div class="project-index container">
+<div class="project-index container text-center bg-transparent">
 
-    <h1 class="mb-5"><?= Html::encode($this->title) ?></h1>
+    <h1 class="mb-4">
+        <?= Html::encode($this->title) ?>
+    </h1>
 
     <div class="">
 
         <?= ListView::widget([
             'dataProvider' => $dataProvider,
-            'itemOptions' => ['class' => 'project'],
+            'itemOptions' => ['class' => 'col-md-3 mb-3'],
             'itemView' => '_project',
-            'layout' => "<div class='project-items'>{items}</div>\n{pager}",
+            'layout' => "   
+                            <div class='container text-center'>
+                                <div class='row align-items-center'>
+                                    {items}
+                                </div>
+                            </div>
+                        ",
         ]) ?>
 
     </div>

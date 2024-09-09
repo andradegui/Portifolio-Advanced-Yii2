@@ -7,12 +7,12 @@ use yii\widgets\DetailView;
 /** @var common\models\Project $model */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Projects'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+// $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Projects'), 'url' => ['index']];
+// $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
 
-<div class="project-view">
+<div class="project-view bg-transparent">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
