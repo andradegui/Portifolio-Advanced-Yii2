@@ -215,4 +215,18 @@ class Project extends \yii\db\ActiveRecord
         }
 
     }
+
+    public function carousselImages(){
+
+        return array_map(function ($projectImage){
+
+            return Html::img($projectImage->file->absoluteUrl(), [
+                'alt' => $this->name,
+                // 'height' => 800,
+                'class' => 'mb-5 mt-3 rounded-5 project-view__carousel-image'
+            ]);
+
+        }, $this->images);
+
+    }
 }
