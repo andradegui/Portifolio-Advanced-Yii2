@@ -26,6 +26,8 @@ use yii\grid\GridView;
                 'value' => function($model){
                     return Html::a($model->project->name, ['project/view', 'id' => $model->project_id]);
                 },
+                'contentOptions' => ['class' => 'text-truncate'],
+
 
             ],
             [
@@ -45,6 +47,8 @@ use yii\grid\GridView;
                     ]);
 
                 },
+                'contentOptions' => ['class' => 'text-center'],
+                // 'headerOptions' => ['class' => 'text-center text-reset text-decoration-none teste'],
             ],
             'title',
             'customer_name',
