@@ -39,4 +39,8 @@ $this->title = $model->name;
     <?= $model->description ?>
    </div>
 
+   <?php if($model->testimonials): ?>
+    <h2><?= Yii::t('app', 'Testimonials'); ?></h2>
+   <?php endif; ?>
+
 </div>
