@@ -153,3 +153,10 @@ a.desc:after {
 .project-view__description{
     margin-bottom: 16px;
 }
+
+.project-view__carousel-image{
+    object-fit: cover;
+    width: 100%;
+    max-height: 700px;
+}
+
