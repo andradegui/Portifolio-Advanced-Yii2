@@ -2,11 +2,14 @@
 
 namespace frontend\controllers;
 
-use common\models\Project;
-use frontend\models\ProjectSearch;
+use Yii;
 use yii\web\Controller;
-use yii\web\NotFoundHttpException;
+use common\models\Project;
 use yii\filters\VerbFilter;
+use common\models\Testimonial;
+use yii\data\ActiveDataProvider;
+use frontend\models\ProjectSearch;
+use yii\web\NotFoundHttpException;
 
 /**
  * ProjectController implements the CRUD actions for Project model.
@@ -55,8 +58,16 @@ class ProjectController extends Controller
      */
     public function actionView($id)
     {
+        $dataProvider = new ActiveDataProvider([
+            'query' => Testimonial::find()->where(['project_id' => $id]),
+            'pagination' => [
+                'pageSize' => 1,
+            ],
+        ]);
+
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'dataProvider' => $dataProvider
         ]);
     }
 

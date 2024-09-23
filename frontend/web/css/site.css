@@ -160,3 +160,14 @@ a.desc:after {
     max-height: 700px;
 }
 
+.project-view__testimonial{
+    margin-bottom: 32px;
+}
+
+.project-view__testimonial-image{
+    height: 100px;
+    width: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
