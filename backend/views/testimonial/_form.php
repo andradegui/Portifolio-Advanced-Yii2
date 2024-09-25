@@ -44,7 +44,7 @@ use kartik\rating\StarRating;
     <?= $form->field($model, 'review')->textarea(['rows' => 6]) ?>
 
     <?= $form->field($model, 'rating')->widget(StarRating::classname(), [
-        'pluginOptions' => ['step' => 0.1]
+        'pluginOptions' => ['step' => 1.0]
     ]); ?>
 
     <div class="form-group">
