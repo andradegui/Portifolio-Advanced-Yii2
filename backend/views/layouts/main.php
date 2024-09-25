@@ -11,6 +11,9 @@ use yii\bootstrap5\Nav;
 use yii\bootstrap5\NavBar;
 
 AppAsset::register($this);
+
+$this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii::getAlias('@web/dev.ico')]);
+
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
