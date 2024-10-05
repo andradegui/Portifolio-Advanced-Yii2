@@ -10,6 +10,9 @@
 
 `php yii migrate/create create_project_table`
 
+`php yii migrate/create create_post_table --fields="title:string:notNull, body:text:notNull, is_published:boolean:notNull, created_at:bigInteger:notNull, updated_at:bigInteger:notNull`
+
+
 - Rollback
 
 `php yii migrate/down `
