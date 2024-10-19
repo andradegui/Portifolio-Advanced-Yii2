@@ -16,16 +16,10 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'body')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'slug')->textarea(['rows' => 6]) ?>
-
-    <?= $form->field($model, 'is_published')->textInput() ?>
-
-    <?= $form->field($model, 'created_at')->textInput() ?>
-
-    <?= $form->field($model, 'updated_at')->textInput() ?>
+    <?= $form->field($model, 'is_published')->checkbox(['class' => 'mb-2 mt-2']) ?>
 
     <div class="form-group">
-        <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success mb-2 mt-2']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
