@@ -48,5 +48,6 @@ return [
             ],
         ],    
     ],
+    'timeZone' => 'America/Sao_Paulo',
     'params' => $params,
 ];

@@ -37,14 +37,14 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
             'class' => 'navbar navbar-expand-md navbar-dark bg-dark fixed-top',
         ],
     ]);
-    $menuItems = [
-        ['label' => 'Home', 'url' => ['/site/index']],
-    ];
+
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
-    }     
+    }
+         
     $menuItems[] = ['label' => 'Projects', 'url' => ['/project/index'] ];
     $menuItems[] = ['label' => 'Testimonials', 'url' => ['/testimonial/index'] ];
+    $menuItems[] = ['label' => 'Blog Posts', 'url' => ['/blog/post'] ];
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav me-auto mb-2 mb-md-0'],
         'items' => $menuItems,
