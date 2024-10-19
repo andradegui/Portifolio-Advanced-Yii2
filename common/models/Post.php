@@ -10,6 +10,7 @@ use Yii;
  * @property int $id
  * @property string $title
  * @property string $body
+ * @property string $slug
  * @property int $is_published
  * @property int $created_at
  * @property int $updated_at
@@ -30,8 +31,8 @@ class Post extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'body', 'is_published', 'created_at', 'updated_at'], 'required'],
-            [['body'], 'string'],
+            [['title', 'body', 'slug', 'is_published', 'created_at', 'updated_at'], 'required'],
+            [['body', 'slug'], 'string'],
             [['is_published', 'created_at', 'updated_at'], 'integer'],
             [['title'], 'string', 'max' => 255],
         ];
@@ -46,6 +47,7 @@ class Post extends \yii\db\ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'title' => Yii::t('app', 'Title'),
             'body' => Yii::t('app', 'Body'),
+            'slug' => Yii::t('app', 'Slug'),
             'is_published' => Yii::t('app', 'Is Published'),
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
