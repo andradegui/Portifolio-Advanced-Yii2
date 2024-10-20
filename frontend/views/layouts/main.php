@@ -44,7 +44,8 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
             $menuItems = [
                 ['label' => 'Home', 'url' => ['/site/index']],
                 ['label' => Yii::t('app', 'Projects'), 'url' => ['/project']],
-                ['label' => 'Contact', 'url' => ['/site/contact']],
+                ['label' => Yii::t('app', 'Blog'), 'url' => ['/blog/post/index']],
+                // ['label' => 'Contact', 'url' => ['/site/contact']],
             ];
 
             echo Nav::widget([
