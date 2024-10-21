@@ -89,6 +89,17 @@ a.desc:after {
     outline: none;
 }
 
+.breadcrumb {
+    background-color: var(--bs-gray-200);
+    border-radius: .25rem;
+    padding: .75rem 1rem;
+}
+
+.breadcrumb-item > a
+{
+    text-decoration: none;
+}
+
 .project-view__image, .project-form__image{
     display: block;
     margin-bottom: 16px;
