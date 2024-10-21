@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'itemOptions' => ['class' => 'item'],
         'layout' => "{items}\n{pager}",
         'itemView' => function ($model, $key, $index, $widget) {
-            return Html::a(Html::encode($model->title), ['view', 'id' => $model->id]);
+            return Html::a(Html::encode($model->title), ['/blog/post/' . $model->slug]);
         },
     ]) ?>
 
